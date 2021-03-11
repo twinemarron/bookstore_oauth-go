@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/twinemarron/bookstore_oauth-api/src/repository/rest"
+	"github.com/mercadolibre/golang-restclient/rest"
 	"github.com/twinemarron/bookstore_oauth-go/oauth/errors"
 )
 
@@ -78,6 +78,9 @@ func AuthenticateRequest(request *http.Request) *errors.RestErr {
 
 	at, err := getAccessToken(accessToken)
 	if err != nil {
+		if err.Status == http.StatusNotFound {
+			return nil
+		}
 		return err
 	}
 
