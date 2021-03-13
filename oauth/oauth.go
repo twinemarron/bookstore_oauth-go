@@ -116,6 +116,8 @@ func getAccessToken(accessTokenId string) (*accessToken, *errors.RestErr) {
 
 	var at accessToken
 	if err := json.Unmarshal(response.Bytes(), &at); err != nil {
+		fmt.Println("log...Unmarshal...err...")
+		fmt.Println(err)
 		return nil, errors.NewInternalServerError("error when trying unmarshall access token response")
 	}
 	return &at, nil
